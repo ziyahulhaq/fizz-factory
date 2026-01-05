@@ -8,6 +8,7 @@
 }
 :root {
   /* Colors */
+  
   --white-color: #fff;
   --dark-color: #252525;
   --primary-color: #3b141c;
@@ -75,14 +76,63 @@ section .section-title::after {
   position: fixed;
   background: var(--primary-color);
 }
-header .navbar {
+.button{
+  --glow-color:rgb(217, 176 , 255);
+  --glow-spread-color:rgba(210, 14, 187, 0.781);
+  --enhanced-glow-color:rgb(128, 16, 232);
+  --btn-color:rgb(100, 61, 136);
+  border: 0.25em solid var(--glow-color);
+  padding: 1em 3em;
+  color: var(--glow-color);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  border-radius: 1em;
+  outline: none;
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+  0 0 4em 1em var(--glow-spread-color),
+  inset 0 0 0.75em var(--glow-color);
+  text-shadow: 0 0 0.75em 0.25em var(--glow-color);
+  position: relative;
+  transition: all 0.3s;
+
+}
+button::after{
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--glow-spread-color);
+  filter: blur(2em);
+  opacity: 0.7;
+  transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
+}
+button:hover{
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+  0 0 4em 2em var(--glow-spread-color),
+  inset 0 0 0.75em 0.25em var(--glow-color);
+}
+button:active{
+  box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+  0 0 2.5em 2em var(--glow-spread-color),
+  inset 0 0 0.5em 0.25em var(--glow-color) ;
+}
+/* header .navbar {
+
+
   display: flex;
   padding: 20px;
   align-items: center;
   margin: 0 auto;
   justify-content: space-between;
   max-width: var(--site-max-width);
-}
+
+} */
 .navbar .nav-logo .logo-text {
   color: var(--white-color);
   font-size: var(--font-size-xl);
@@ -97,15 +147,16 @@ header .navbar {
   color: var(--white-color);
   font-size: var(--font-size-m);
   border-radius: var(--border-radius-m);
+  
   transition: 0.3s ease;
 }
 .navbar .nav-menu .nav-link:hover {
   color: var(--primary-color);
-  background: var(--secondary-color);
+  background: var(--secondary-color);     /* wertfgfefghegfebg */
 }
 .navbar :where(#menu-open-button, #menu-close-button) {
   display: none;
-}.hero-section {
+}.hero-section { 
   min-height: 100vh;
   background: var(--primary-color);
 }
@@ -139,12 +190,12 @@ header .navbar {
   display: flex;
   gap: 23px;
 }
-.hero-section .hero-details .button {
+ .hero-section .hero-details .button { 
   padding: 10px 26px;
   display: block;
   border: 2px solid transparent;
   border-radius: var(--border-radius-m);
-  background: var(--secondary-color);
+  background: var(--glow-color);
   color: var(--primary-color);
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-medium);
@@ -158,12 +209,20 @@ header .navbar {
 }
 .hero-section .hero-details .button.contact-us:hover {
   color: var(--primary-color);
-  background: var(--secondary-color);
-  border-color: var(--secondary-color);
+  background: var(--glow-color);
 }
 .hero-section .hero-image-wrapper {
   max-width: 500px;
   margin-right: 30px;
+}
+.hero-image-wrapper{
+  animation: 3s infinite anim-div
+}
+
+
+@keyframes anim-div{
+   0%{transform:rotate(90deg);}
+   100% {transform: scale(2);}
 }
 .about-section {
   padding: 120px 0;
@@ -306,7 +365,8 @@ header .navbar {
   transition: 0.3s ease;
 }
 .gallery-section .gallery-item:hover .gallery-image {
-  transform: scale(1.3);
+  transform: rotatex(360deg);
+  transition: 2s;
 }
 .contact-section {
   padding: 50px 0 100px;
@@ -364,7 +424,7 @@ header .navbar {
   color: var(--primary-color);
   background: transparent;
 }
-/* Footer section styling */
+
 .footer-section {
   padding: 20px 0;
   background: var(--dark-color);
@@ -393,7 +453,7 @@ header .navbar {
   color: #fff;
   margin: 0 5px;
 }
-/* Responsive media query code for max width 1024px */
+
 @media screen and (max-width: 1024px) {
   .menu-section .menu-list {
     gap: 60px;
@@ -402,7 +462,7 @@ header .navbar {
     width: calc(100% / 3 - 60px);
   }
 }
-/* Responsive media query code for max width 900px */
+
 @media screen and (max-width: 900px) {
   :root {
     --font-size-m: 1rem;
@@ -427,8 +487,17 @@ header .navbar {
   .navbar :is(#menu-open-button, #menu-close-button) {
     font-size: var(--font-size-l);
     display: block;
+  } 
+   .navbar :is(#menu-open-button, #menu-close-button):hover {
+    color: var(--secondary-color) !important;
   }
-  .navbar :is(#menu-open-button, #menu-close-button):hover {
+  .navbar #menu-open-button {
+    color: #fff;
+  }
+  .navbar .nav-menu #menu-close-button {
+    position: absolute;
+    right: 30px;
+    top: 30px;  navbar :is(#menu-open-button, #menu-close-button):hover {
     color: var(--secondary-color) !important;
   }
   .navbar #menu-open-button {
@@ -439,6 +508,7 @@ header .navbar {
     right: 30px;
     top: 30px;
   }
+  } 
   .navbar .nav-menu {
     display: block;
     background: #fff;
@@ -512,8 +582,8 @@ header .navbar {
     flex-direction: column-reverse;
   }
 }
-/* Responsive media query code for max width 640px */
- @media screen and (max-width: 640px) {
+
+@media screen and (max-width: 640px) {
   .menu-section .menu-list .menu-item,
   .gallery-section .gallery-list .gallery-item {
     width: 100%;
@@ -532,3 +602,205 @@ header .navbar {
     gap: 20px;
   }
 } 
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+body::before {
+	--line: hsl(0 0% 95% / 0.25);
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	background:
+		linear-gradient(90deg, var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin,
+		linear-gradient(var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin;
+	mask: linear-gradient(-15deg, transparent 30%, white);
+	top: 0;
+	z-index: -1;
+}
+
+
+
+.code {
+  font-size: 9rem;
+  display: flex;
+  flex-wrap: nowrap;
+  color: hsl(0, 4%, 5%);
+  border-radius: 1rem;
+  background: var(--color-white);
+  justify-content: center;
+  box-shadow: 0 1px hsl(0 0% 100% / 0.25) inset;
+}
+
+.code:hover {
+  cursor: grab;
+}
+
+.digit {
+  display: flex;
+  height: 100%;
+  padding: 5.5rem 1rem;
+}
+
+.digit:focus-visible {
+  outline-color: hsl(0 0% 50% / 0.25);
+  outline-offset: 1rem;
+}
+
+.digit span {
+  scale: calc(var(--active, 0) + 0.5);
+  filter: blur(calc((1 - var(--active, 0)) * 1rem));
+  transition: scale calc(((1 - var(--active, 0)) + 0.2) * 1s), filter calc(((1 - var(--active, 0)) + 0.2) * 1s);
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.digit:first-of-type {
+  padding-left: 5rem;
+}
+.digit:last-of-type {
+  padding-right: 5rem;
+}
+
+:root {
+  --lerp-0: 1; /* === sin(90deg) */
+  --lerp-1: calc(sin(50deg));
+  --lerp-2: calc(sin(45deg));
+  --lerp-3: calc(sin(35deg));
+  --lerp-4: calc(sin(25deg));
+  --lerp-5: calc(sin(15deg));
+}
+
+.digit:is(:hover, :focus-visible) {
+  --active: var(--lerp-0);
+}
+.digit:is(:hover, :focus-visible) + .digit,
+.digit:has(+ .digit:is(:hover, :focus-visible)) {
+  --active: var(--lerp-1);
+}
+.digit:is(:hover, :focus-visible) + .digit + .digit,
+.digit:has(+ .digit + .digit:is(:hover, :focus-visible)) {
+  --active: var(--lerp-2);
+}
+.digit:is(:hover, :focus-visible) + .digit + .digit + .digit,
+.digit:has(+ .digit + .digit + .digit:is(:hover, :focus-visible)) {
+  --active: var(--lerp-3);
+}
+.digit:is(:hover, :focus-visible) + .digit + .digit + .digit + .digit,
+.digit:has(+ .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) {
+  --active: var(--lerp-4);
+}
+.digit:is(:hover, :focus-visible) + .digit + .digit + .digit + .digit + .digit,
+.digit:has(+ .digit + .digit + .digit + .digit + .digit:is(:hover, :focus-visible)) {
+  --active: var(--lerp-5);
+}
+
+
+
+
+
+        span {
+            font-size: 100px;
+            color: rgb(236, 234, 234);
+            font-size: 30px;
+            /* font-family: 'Arial'; */
+            /* text-transform: uppercase; */
+            display: inline-block;
+            transform: rotateY(0deg);
+            /* transition: 0.5s; */
+            animation: bounce 0.1s ease infinite alternate;
+            position: relative; /* Added this to allow 'top' property */
+        }
+h1 span:nth-child(3)  { animation-delay: 1s; }
+h1 span:nth-child(4)  { animation-delay: 2s; }
+h1 span:nth-child(5)  { animation-delay: 3s; }
+h1 span:nth-child(6)  { animation-delay: 4s; }
+h1 span:nth-child(7)  { animation-delay: 5s; }
+h1 span:nth-child(8)  { animation-delay: 6s; }
+h1 span:nth-child(9)  { animation-delay: 7s; }
+h1 span:nth-child(10) { animation-delay: 8s; }
+h1 span:nth-child(11) { animation-delay: 9s; }
+h1 span:nth-child(12) { animation-delay: 10s; }
+h1 span:nth-child(13) { animation-delay: 11s; }
+h1 span:nth-child(14) { animation-delay: 12s; }
+h1 span:nth-child(15) { animation-delay: 13s; }
+h1 span:nth-child(16) { animation-delay: 14s; }
+h1 span:nth-child(17) { animation-delay: 15s; }
+h1 span:nth-child(18) { animation-delay: 16s; }
+h1 span:nth-child(19) { animation-delay: 17s; }
+h1 span:nth-child(20) { animation-delay: 18s; }
+h1 span:nth-child(21) { animation-delay: 19s; }
+h1 span:nth-child(22) { animation-delay: 20s; }
+h1 span:nth-child(23) { animation-delay: 21s; }
+h1 span:nth-child(24) { animation-delay: 22s; }
+h1 span:nth-child(25) { animation-delay: 23s; }
+h1 span:nth-child(26) { animation-delay: 24s; }
+h1 span:nth-child(27) { animation-delay: 25s; }
+h1 span:nth-child(28) { animation-delay: 26s; }
+h1 span:nth-child(29) { animation-delay: 27s; }
+h1 span:nth-child(30) { animation-delay: 28s; }
+h1 span:nth-child(31) { animation-delay: 29s; }
+h1 span:nth-child(32) { animation-delay: 30s; }
+h1 span:nth-child(33) { animation-delay: 31s; }
+h1 span:nth-child(34) { animation-delay: 32s; }
+h1 span:nth-child(35) { animation-delay: 33s; }
+h1 span:nth-child(36) { animation-delay: 34s; }
+h1 span:nth-child(37) { animation-delay: 35s; }
+h1 span:nth-child(38) { animation-delay: 36s; }
+h1 span:nth-child(39) { animation-delay: 37s; }
+h1 span:nth-child(40) { animation-delay: 38s; }
+h1 span:nth-child(41) { animation-delay: 39s; }
+h1 span:nth-child(42) { animation-delay: 40s; }
+h1 span:nth-child(43) { animation-delay: 41s; }
+h1 span:nth-child(44) { animation-delay: 42s; }
+h1 span:nth-child(45) { animation-delay: 43s; }
+h1 span:nth-child(46) { animation-delay: 44s; }
+h1 span:nth-child(47) { animation-delay: 45s; }
+h1 span:nth-child(48) { animation-delay: 46s; }
+h1 span:nth-child(49) { animation-delay: 47s; }
+h1 span:nth-child(50) { animation-delay: 48s; }
+h1 span:nth-child(51) { animation-delay: 49s; }
+h1 span:nth-child(52) { animation-delay: 50s; }
+h1 span:nth-child(53) { animation-delay: 51s; }
+h1 span:nth-child(54) { animation-delay: 52s; }
+h1 span:nth-child(55) { animation-delay: 53s; }
+h1 span:nth-child(56) { animation-delay: 54s; }
+h1 span:nth-child(57) { animation-delay: 55s; }
+h1 span:nth-child(58) { animation-delay: 56s; }
+h1 span:nth-child(59) { animation-delay: 57s; }
+h1 span:nth-child(60) { animation-delay: 58s; }
+h1 span:nth-child(61) { animation-delay: 59s; }
+h1 span:nth-child(62) { animation-delay: 60s; }
+h1 span:nth-child(63) { animation-delay: 61s; }
+h1 span:nth-child(64) { animation-delay: 62s; }
+h1 span:nth-child(65) { animation-delay: 63s; }
+h1 span:nth-child(66) { animation-delay: 64s; }
+h1 span:nth-child(67) { animation-delay: 65s; }
+h1 span:nth-child(68) { animation-delay: 66s; }
+h1 span:nth-child(69) { animation-delay: 67s; }
+h1 span:nth-child(70) { animation-delay: 68s; }
+
+
+
+        
+        @keyframes bounce {
+            100% {
+                top: -20px; 
+                text-shadow: 0 1px 0 #f7f2f2,
+                             0 2px 0 #f8f3f3,
+                             0 3px 0 #ccc,
+                             0 4px 0 #ccc,
+                             0 5px 0 #ccc,
+                             0 6px 0 #ccc,
+                             0 7px 0 #ccc,
+                             0 8px 0 #ccc;
+            }
+        }
